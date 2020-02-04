@@ -45,9 +45,19 @@ public class CellLocationController : MonoBehaviour
             {
                 _cells[i,j] = Instantiate(Resources.Load("Embeded/Game/Cell/pfCell", typeof(GameObject))) as GameObject;
 
-                Vector3 cellPosition = new Vector3( transform.position.x + i * 150, 
+                //Вычисление размеров клеток
+                float cellScaleX = transform.localScale.x / (2 * AppContext.GameManager.M);
+                float cellScaleZ = transform.localScale.z / (2 * AppContext.GameManager.N);
+
+
+                _cells[i, j].transform.localScale = new Vector3(cellScaleX, 
+                                                                _cells[i, j].transform.localScale.y, 
+                                                                cellScaleZ);
+
+                 //Вычисление координат
+                Vector3 cellPosition = new Vector3( transform.position.x + i*25, 
                                                     transform.position.y, 
-                                                    transform.position.z + j * 150);
+                                                    transform.position.z + j*25);
                 _cells[i, j].transform.position = cellPosition;
             }
         }
