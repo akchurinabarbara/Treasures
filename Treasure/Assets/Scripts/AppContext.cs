@@ -6,14 +6,21 @@ using UnityEngine;
 public static class AppContext 
 {
     #region Fields
-    //Состояние игрового "поля"
+    //Состояние текущей игры
     private static GameManager _gameManager;
+    //Состояние координат игрового "поля"
+    private static LocationManager _locationManager;
     #endregion
 
     #region Properties
     public static GameManager GameManager
     {
         get { return _gameManager; }
+    }
+
+    public static LocationManager LocationManager
+    {
+        get { return _locationManager; }
     }
     #endregion
 
@@ -22,6 +29,7 @@ public static class AppContext
     public static void Configure()
     {
         _gameManager = new GameManager();
+        _locationManager = new LocationManager();
     }
     #endregion
 }

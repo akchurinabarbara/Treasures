@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3863515045586599066}
   - component: {fileID: 4015559719752517307}
   - component: {fileID: 1055845772}
-  - component: {fileID: 4245460748774713877}
   m_Layer: 0
   m_Name: pfBoard
   m_TagString: GameBoard
@@ -30,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3863515045586599068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -898, z: -67}
-  m_LocalScale: {x: 27.602568, y: 17.18501, z: 17.18501}
+  m_LocalScale: {x: 27.602571, y: 17.18501, z: 17.18501}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,15 +108,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.999999, y: 0, z: 10.222879}
   m_Center: {x: 8.636763e-12, y: 0, z: 0.1114564}
---- !u!114 &4245460748774713877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3863515045586599068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd9c146ac74619e4ca6e8cc3c89502f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
