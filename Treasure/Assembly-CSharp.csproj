@@ -64,7 +64,7 @@
     <Compile Include="Assets\Scripts\Configs\LevelConfig.cs" />
     <Compile Include="Assets\Scripts\GameApplication.cs" />
     <Compile Include="Assets\Scripts\GameObjects\Camera\CameraPositionController.cs" />
-    <Compile Include="Assets\Scripts\GameObjects\GameZone\CellLocationController.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\GameZone\LevelGenerateController.cs" />
     <Compile Include="Assets\Scripts\Service\GameManager.cs" />
     <Compile Include="Assets\Scripts\Service\LocationManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
