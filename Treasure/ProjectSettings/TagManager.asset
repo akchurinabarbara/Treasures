@@ -6,6 +6,9 @@ TagManager:
   tags:
   - GameBoard
   - GameZone
+  - BackgroundMusic
+  - MenuMusic
+  - Cell
   layers:
   - Default
   - TransparentFX

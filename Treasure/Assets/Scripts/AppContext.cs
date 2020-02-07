@@ -10,6 +10,8 @@ public static class AppContext
     private static GameManager _gameManager;
     //Состояние координат игрового "поля"
     private static LocationManager _locationManager;
+    //Состояния игрового поля и его ячеек
+    private static CellsManager _cellsManager;
     #endregion
 
     #region Properties
@@ -22,6 +24,11 @@ public static class AppContext
     {
         get { return _locationManager; }
     }
+
+    public static CellsManager CellsManager
+    {
+        get { return _cellsManager; }
+    }
     #endregion
 
     #region Methods
@@ -30,6 +37,7 @@ public static class AppContext
     {
         _gameManager = new GameManager();
         _locationManager = new LocationManager();
+        _cellsManager = new CellsManager();
     }
     #endregion
 }

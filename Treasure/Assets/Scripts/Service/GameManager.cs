@@ -7,7 +7,7 @@ public class GameManager
 {
 #region Fields
     // Размеры поля
-    private int _m = 60;  // клетки в строке
+    private int _m = 15;  // клетки в строке
     private int _n = 15;  // строк
 
     // Количество доступных игроку локаторов

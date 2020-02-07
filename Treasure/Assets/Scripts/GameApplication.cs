@@ -8,6 +8,7 @@ public class GameApplication : MonoBehaviour
     private void Awake()
     {
         AppContext.Configure();
+        AppContext.GameManager.IsGameStarted = true;
     }
 
     void Update()
@@ -16,6 +17,5 @@ public class GameApplication : MonoBehaviour
         {
             return;
         }
-        var n = AppContext.GameManager;
     }
 }
