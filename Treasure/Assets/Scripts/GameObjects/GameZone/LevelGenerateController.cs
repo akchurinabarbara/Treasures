@@ -8,31 +8,15 @@ public class LevelGenerateController : MonoBehaviour
 {
     //ToDo Скорее всего, нужно вынести в отдельный менеджер или в GamrManager.
     //Туда же или в GameLoadedManager код с генерацией уровня. Оставить  только отображение
-
-    //Массив полей игрового поля. True - на этой клетке находится сокровище, False - нет
-    private bool[,] _cellsZone;
-
-    //Массив GameObject ячеек игрового поля
-    //TODO Не забыть переделать на private
-    public GameObject[,] _cells;
-
-
+    
     //Коэффициент для определения размера объекта board
     private float _boardCoef = 6.0f;
 
     void Start()
     {
         //Генерация уровна
-        //Инициализвция игрового поля
-        _cellsZone = new bool[AppContext.GameManager.M, AppContext.GameManager.N];
-
-        for (int i = 0; i < AppContext.GameManager.M; i++)
-        {
-            for (int j = 0; j < AppContext.GameManager.N; j++)
-            {
-                _cellsZone[i, j] = false;
-            }
-        }
+        AppContext.CellsManager.Initialization();
+        CellModel[,] cellsArray = AppContext.CellsManager.Cells;
 
         //Распределение сокровищ по полю
         for (int i = 0; i < AppContext.GameManager.TreasureCount; i++)
@@ -40,25 +24,24 @@ public class LevelGenerateController : MonoBehaviour
             int treasureI = (int)Random.Range(0, AppContext.GameManager.M);
             int treasureJ = (int)Random.Range(0, AppContext.GameManager.N);
 
-            _cellsZone[treasureI, treasureJ] = true;
+            cellsArray[treasureI, treasureJ].HaveTreasure = true;
         }
 
         //Отображение полей на экране
-        _cells = new GameObject[AppContext.GameManager.M, AppContext.GameManager.N];
 
         for (int i = 0; i < AppContext.GameManager.M; i++)
         {
             for (int j = 0; j < AppContext.GameManager.N; j++)
             {
-                _cells[i, j] = Instantiate(Resources.Load("Embeded/Game/Cell/pfCell", typeof(GameObject))) as GameObject;
+                cellsArray[i, j].GameObject = Instantiate(Resources.Load("Embeded/Game/Cell/pfCell", typeof(GameObject))) as GameObject;
 
 
                 //Вычисление координат
                 Vector3 cellPosition = new Vector3( transform.position.x + i * 25,
                                                     transform.position.y,
                                                     transform.position.z + j * 25);
-                _cells[i, j].transform.position = cellPosition;
-                _cells[i, j].transform.SetParent(transform);
+                cellsArray[i, j].GameObject.transform.position = cellPosition;
+                cellsArray[i, j].GameObject.transform.SetParent(transform);
             }
         }
 
@@ -71,20 +54,20 @@ public class LevelGenerateController : MonoBehaviour
 
         if (0 != AppContext.GameManager.M % 2)
         {
-            boardX = _cells[middleI, middleJ].transform.position.x;
+            boardX = cellsArray[middleI, middleJ].GameObject.transform.position.x;
         }
         else
         {
-            boardX = (_cells[middleI - 1, middleJ - 1].transform.position.x + _cells[middleI, middleJ].transform.position.x) / 2;
+            boardX = (cellsArray[middleI - 1, middleJ - 1].GameObject.transform.position.x + cellsArray[middleI, middleJ].GameObject.transform.position.x) / 2;
         }
 
         if (0 != AppContext.GameManager.N % 2)
         {
-            boardZ = _cells[middleI, middleJ].transform.position.z;
+            boardZ = cellsArray[middleI, middleJ].GameObject.transform.position.z;
         }
         else
         {
-            boardZ = (_cells[middleI - 1, middleJ - 1].transform.position.z + _cells[middleI, middleJ].transform.position.z) / 2;
+            boardZ = (cellsArray[middleI - 1, middleJ - 1].GameObject.transform.position.z + cellsArray[middleI, middleJ].GameObject.transform.position.z) / 2;
         }
 
         AppContext.LocationManager.GameZoneCenter = new Vector3(boardX, transform.position.y, boardZ);
@@ -99,9 +82,9 @@ public class LevelGenerateController : MonoBehaviour
         board.transform.SetParent(transform);
 
         //TODO Перенести в класс для board
-        board.transform.localScale = new Vector3(_cells[0, 0].transform.localScale.x * AppContext.GameManager.M / _boardCoef,
+        board.transform.localScale = new Vector3(cellsArray[0, 0].GameObject.transform.localScale.x * AppContext.GameManager.M / _boardCoef,
                                                         board.transform.localScale.y,
-                                                        _cells[0, 0].transform.localScale.z * AppContext.GameManager.N / _boardCoef);
+                                                        cellsArray[0, 0].GameObject.transform.localScale.z * AppContext.GameManager.N / _boardCoef);
         board.transform.position = AppContext.LocationManager.GameZoneCenter;
 
     }
