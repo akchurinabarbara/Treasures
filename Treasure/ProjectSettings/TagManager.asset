@@ -9,6 +9,10 @@ TagManager:
   - BackgroundMusic
   - MenuMusic
   - Cell
+  - UI
+  - AvailableSonarsNumber
+  - AllTreasuresNumber
+  - FindTreasuresNumber
   layers:
   - Default
   - TransparentFX

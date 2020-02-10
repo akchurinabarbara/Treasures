@@ -65,11 +65,14 @@
     <Compile Include="Assets\Scripts\GameApplication.cs" />
     <Compile Include="Assets\Scripts\GameObjects\Camera\CameraPositionController.cs" />
     <Compile Include="Assets\Scripts\GameObjects\Camera\MouseClickController.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\Cell\CellController.cs" />
     <Compile Include="Assets\Scripts\GameObjects\Cell\CellModel.cs" />
-    <Compile Include="Assets\Scripts\GameObjects\Cell\CellsManager.cs" />
     <Compile Include="Assets\Scripts\GameObjects\GameZone\LevelGenerateController.cs" />
+    <Compile Include="Assets\Scripts\Service\DialogManager.cs" />
     <Compile Include="Assets\Scripts\Service\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Service\GameZoneManager.cs" />
     <Compile Include="Assets\Scripts\Service\LocationManager.cs" />
+    <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

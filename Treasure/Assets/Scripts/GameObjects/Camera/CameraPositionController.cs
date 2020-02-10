@@ -22,7 +22,7 @@ public class CameraPositionController : MonoBehaviour
     private  Vector3 _bias = new Vector3(0.0f, 8.0f, -4.0f);
 
     //Угол наклона камеры
-    private Vector3 _rotation = new Vector3(-0.5f, 0.0f, 0.0f);
+    private Vector3 _rotation = new Vector3(75.0f, 0.0f, 0.0f);
 
     private void Start()
     {
