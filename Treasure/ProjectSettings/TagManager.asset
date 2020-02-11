@@ -13,6 +13,21 @@ TagManager:
   - AvailableSonarsNumber
   - AllTreasuresNumber
   - FindTreasuresNumber
+  - RestartDialog
+  - InputFieldM
+  - InputFieldN
+  - InputFieldSonarCount
+  - SoundToggle
+  - StartButton
+  - ExitButton
+  - InputFieldSonarRadius
+  - SettingsDialog
+  - InputFieldTreasureCount
+  - InputFieldMText
+  - InputFieldNText
+  - InputFieldSonarCountText
+  - InputFieldSonarRadiusText
+  - InputFieldTreasureCountText
   layers:
   - Default
   - TransparentFX

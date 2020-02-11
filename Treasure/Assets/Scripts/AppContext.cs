@@ -14,6 +14,8 @@ public static class AppContext
     private static GameZoneManager _gameZonemahager;
     //Менеджер диалоговых окон
     private static DialogManager _dialogManager;
+    //Менеджер генерации уровня
+    private static LevelGenerateManager _levelGenerateManager;
     #endregion
 
     #region Properties
@@ -36,6 +38,11 @@ public static class AppContext
     {
         get { return _dialogManager; }
     }
+
+    public static LevelGenerateManager LevelGenerateManager
+    {
+        get { return _levelGenerateManager; }
+    }
     #endregion
 
     #region Methods
@@ -46,6 +53,7 @@ public static class AppContext
         _locationManager = new LocationManager();
         _gameZonemahager = new GameZoneManager();
         _dialogManager = new DialogManager();
+        _levelGenerateManager = new LevelGenerateManager();
     }
     #endregion
 }

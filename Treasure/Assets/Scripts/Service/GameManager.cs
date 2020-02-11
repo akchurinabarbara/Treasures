@@ -7,14 +7,18 @@ public class GameManager
 {
 #region Fields
     // Размеры поля
-    private int _m = 15;  // клетки в строке
+    private int _m = 10;  // клетки в строке
     private int _n = 15;  // строк
 
     // Количество доступных игроку локаторов
     private int _sonarCount = 10;
 
+    //Радиус сонара
+    private int _sonarRadius = 10;
+
     //Количество сокровищ на карте 
     private int _treasureCount = 5;
+
 
     //Счет (количетсво найденных сундуков с сокровищями во время текущего раунда
     private int _score = 0;
@@ -43,6 +47,12 @@ public class GameManager
     {
         get { return _sonarCount; }
         set { _sonarCount = value; }
+    }
+
+    public int SonarRadius
+    {
+        get { return _sonarRadius; }
+        set { _sonarRadius = value; }
     }
 
     public int TreasureCount
