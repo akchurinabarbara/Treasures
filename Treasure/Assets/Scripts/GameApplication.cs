@@ -8,7 +8,16 @@ public class GameApplication : MonoBehaviour
     private void Awake()
     {
         AppContext.Configure();
-        AppContext.GameManager.IsGameStarted = true;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    private void Start()
+    {
+        
     }
 
     void Update()

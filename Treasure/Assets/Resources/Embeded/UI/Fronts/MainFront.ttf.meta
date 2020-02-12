@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ba54f2eba99557a47a2f09be2e501878
+guid: 22c011f52831c8940b3489e5aa407e83
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Sevenet7Cyr
+  fontName: MurreyC
   fontNames:
-  - Sevenet7Cyr
+  - MurreyC
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

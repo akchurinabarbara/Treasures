@@ -10,8 +10,12 @@ public static class AppContext
     private static GameManager _gameManager;
     //Состояние координат игрового "поля"
     private static LocationManager _locationManager;
-    //Состояния игрового поля и его ячеек
-    private static CellsManager _cellsManager;
+    //Состояние игрового "поля"
+    private static GameZoneManager _gameZonemahager;
+    //Менеджер диалоговых окон
+    private static DialogManager _dialogManager;
+    //Менеджер генерации уровня
+    private static LevelGenerateManager _levelGenerateManager;
     #endregion
 
     #region Properties
@@ -25,9 +29,19 @@ public static class AppContext
         get { return _locationManager; }
     }
 
-    public static CellsManager CellsManager
+    public static GameZoneManager GameZoneManager
     {
-        get { return _cellsManager; }
+        get { return _gameZonemahager; }
+    }
+
+    public static DialogManager DialogManager
+    {
+        get { return _dialogManager; }
+    }
+
+    public static LevelGenerateManager LevelGenerateManager
+    {
+        get { return _levelGenerateManager; }
     }
     #endregion
 
@@ -37,7 +51,9 @@ public static class AppContext
     {
         _gameManager = new GameManager();
         _locationManager = new LocationManager();
-        _cellsManager = new CellsManager();
+        _gameZonemahager = new GameZoneManager();
+        _dialogManager = new DialogManager();
+        _levelGenerateManager = new LevelGenerateManager();
     }
     #endregion
 }

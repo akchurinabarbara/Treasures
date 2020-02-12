@@ -9,6 +9,31 @@ TagManager:
   - BackgroundMusic
   - MenuMusic
   - Cell
+  - UI
+  - AvailableSonarsNumber
+  - AllTreasuresNumber
+  - FindTreasuresNumber
+  - RestartDialog
+  - InputFieldM
+  - InputFieldN
+  - InputFieldSonarCount
+  - SoundToggle
+  - StartButton
+  - ExitButton
+  - InputFieldSonarRadius
+  - SettingsDialog
+  - InputFieldTreasureCount
+  - InputFieldMText
+  - InputFieldNText
+  - InputFieldSonarCountText
+  - InputFieldSonarRadiusText
+  - InputFieldTreasureCountText
+  - Sonar
+  - YesButton
+  - NoButton
+  - ResultText
+  - ContinueButton
+  - PauseDialog
   layers:
   - Default
   - TransparentFX

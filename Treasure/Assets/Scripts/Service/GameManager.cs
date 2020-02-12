@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +8,18 @@ public class GameManager
 {
 #region Fields
     // Размеры поля
-    private int _m = 15;  // клетки в строке
+    private int _m = 10;  // клетки в строке
     private int _n = 15;  // строк
 
     // Количество доступных игроку локаторов
     private int _sonarCount = 10;
 
+    //Радиус сонара
+    private int _sonarRadius = 10;
+
     //Количество сокровищ на карте 
     private int _treasureCount = 5;
+
 
     //Счет (количетсво найденных сундуков с сокровищями во время текущего раунда
     private int _score = 0;
@@ -45,6 +50,12 @@ public class GameManager
         set { _sonarCount = value; }
     }
 
+    public int SonarRadius
+    {
+        get { return _sonarRadius; }
+        set { _sonarRadius = value; }
+    }
+
     public int TreasureCount
     {
         get { return _treasureCount; }
@@ -68,6 +79,17 @@ public class GameManager
         get { return _isPaused; }
         set { _isPaused = value; }
     }
-#endregion
+    #endregion
+
+    #region methods
+    public void EndGame(String endText)
+    {
+        IsGameStarted = false;
+        AppContext.DialogManager.UiHide();
+        AppContext.DialogManager.RestartDialogShow();
+        RestartDialogController.SetResultText(endText);
+        AppContext.LevelGenerateManager.DestroyLevel();
+    }
+    #endregion
 
 }

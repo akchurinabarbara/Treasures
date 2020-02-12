@@ -22,13 +22,14 @@ public class CameraPositionController : MonoBehaviour
     private  Vector3 _bias = new Vector3(0.0f, 8.0f, -4.0f);
 
     //Угол наклона камеры
-    private Vector3 _rotation = new Vector3(-0.5f, 0.0f, 0.0f);
+    private Vector3 _rotation = new Vector3(75.0f, 0.0f, 0.0f);
 
-    private void Start()
+    //Устанавливает начальное положение камеры на уровне
+    public void SetStartPosition()
     {
         _gameBoard = GameObject.FindGameObjectWithTag("GameBoard");
 
-        _minScale = _gameBoard.transform.position.y + 2;
+        _minScale = _gameBoard.transform.position.y + 10;
 
         _right = _gameBoard.transform.position.x + _gameBoard.transform.lossyScale.x;
         _left = _gameBoard.transform.position.x - _gameBoard.transform.lossyScale.x;
@@ -41,7 +42,7 @@ public class CameraPositionController : MonoBehaviour
                                      new Vector3(0.0f, _bias.y * _gameBoard.transform.localScale.x,_bias.z * _gameBoard.transform.localScale.z);
 
         //Начальный поворот камеры
-        transform.Rotate(_rotation);
+        transform.rotation = Quaternion.Euler(_rotation);
     }
 
     void Update()
