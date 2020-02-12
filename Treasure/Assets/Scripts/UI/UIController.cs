@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
         SetStartText();
     }
 
+
     //Показывает значения найденных сокровищ
     public static void SetFindTreasuresNumber(int count)
     {
@@ -40,12 +41,13 @@ public class UIController : MonoBehaviour
     }
 
     //Управление кнопкой паузы
-    private void OnPauseClick(bool value)
+    public void OnPauseClick(bool value)
     {
         if (AppContext.GameManager.IsPaused == false)
         {
-            //AppContext.DialogManager.PauseDialogShow();
             AppContext.GameManager.IsPaused = true;
+            AppContext.DialogManager.UiHide();
+            AppContext.DialogManager.PauseDialogShow();
         }
     }
     #endregion

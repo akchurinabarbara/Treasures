@@ -10,6 +10,8 @@ public class DialogManager
     private GameObject _settingsDialog;
     //Окно, оповещающее об окончании игры
     private GameObject _restartDialog;
+    //Окно паузы
+    private GameObject _pauseDialog;
     #endregion
 
     #region constuctor
@@ -22,8 +24,10 @@ public class DialogManager
         _settingsDialog.SetActive(true);
 
         _restartDialog = GameObject.FindGameObjectWithTag("RestartDialog");
-        //_restartDialog.SetActive(false);
+        _restartDialog.SetActive(false);
 
+        _pauseDialog = GameObject.FindGameObjectWithTag("PauseDialog");
+        _pauseDialog.SetActive(false);
     }
     #endregion
 
@@ -50,12 +54,23 @@ public class DialogManager
 
     public void RestartDialogShow()
     {
-        _restartDialog.SetActive(true);
+       _restartDialog.SetActive(true);
     }
 
     public void RestartDialogHide()
     {
         _restartDialog.SetActive(false);
+    }
+
+
+    public void PauseDialogShow()
+    {
+        _pauseDialog.SetActive(true);
+    }
+
+    public void PauseDialogHide()
+    {
+        _pauseDialog.SetActive(false);
     }
     #endregion
 }

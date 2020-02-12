@@ -28,6 +28,12 @@ TagManager:
   - InputFieldSonarCountText
   - InputFieldSonarRadiusText
   - InputFieldTreasureCountText
+  - Sonar
+  - YesButton
+  - NoButton
+  - ResultText
+  - ContinueButton
+  - PauseDialog
   layers:
   - Default
   - TransparentFX

@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 2057179269644385995}
   - component: {fileID: 2057179269644385994}
   - component: {fileID: 4392461871108408926}
-  - component: {fileID: 1206070138302168960}
   m_Layer: 0
   m_Name: pfSonar
-  m_TagString: Untagged
+  m_TagString: Sonar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,21 +86,9 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057179269644385992}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.50000006
   m_Height: 2.6166701
   m_Direction: 1
   m_Center: {x: 0.00000006769072, y: 0.014236793, z: -0.000000093065246}
---- !u!114 &1206070138302168960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2057179269644385992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22326a04e1a843c4f93937c29a295e2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

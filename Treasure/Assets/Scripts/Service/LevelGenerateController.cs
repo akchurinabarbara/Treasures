@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,15 +20,37 @@ public class LevelGenerateManager
         //Генерация уровна
         AppContext.GameZoneManager.Cells = new GameObject[AppContext.GameManager.M, AppContext.GameManager.N];
         GameObject[,] cellsArray = AppContext.GameZoneManager.Cells;
-               
+
+        //Генерация номеров для расположения сокровищ
+        LocationStruct[] treasureCoordinates = new LocationStruct[AppContext.GameManager.TreasureCount];
+
+        for (int i = 0; i < AppContext.GameManager.TreasureCount; i++)
+        {
+            LocationStruct treasureLocation = new LocationStruct();
+            do
+            {
+                treasureLocation.i = (int)UnityEngine.Random.Range(0, AppContext.GameManager.M);
+                treasureLocation.j = (int)UnityEngine.Random.Range(0, AppContext.GameManager.N);
+            }
+            while (Array.Exists(treasureCoordinates, element =>  treasureLocation.i == element.i && treasureLocation.j == element.j));
+            treasureCoordinates[i] = treasureLocation;
+        }
+
         //Отображение полей на экране
 
-        for (int i = 0; i < AppContext.GameManager.M; i++)
+            for (int i = 0; i < AppContext.GameManager.M; i++)
         {
             for (int j = 0; j < AppContext.GameManager.N; j++)
             {
-                cellsArray[i, j] = GameObject.Instantiate(Resources.Load("Embeded/Game/Cell/pfCell", typeof(GameObject))) as GameObject;
-             
+                if (Array.Exists(treasureCoordinates, element => i == element.i && j == element.j))
+                {
+                    cellsArray[i, j] = GameObject.Instantiate(Resources.Load("Embeded/Game/Cell/pfTreasureCell", typeof(GameObject))) as GameObject;
+                }
+                else
+                {
+                    cellsArray[i, j] = GameObject.Instantiate(Resources.Load("Embeded/Game/Cell/pfCell", typeof(GameObject))) as GameObject;
+                }
+
                 //Вычисление координат
                 Vector3 cellPosition = new Vector3(gameZone.transform.position.x + i * 25,
                                                     gameZone.transform.position.y,
@@ -41,15 +64,6 @@ public class LevelGenerateManager
             }
         }
 
-
-        //Распределение сокровищ по полю
-        for (int i = 0; i < AppContext.GameManager.TreasureCount; i++)
-        {
-            int treasureI = (int)Random.Range(0, AppContext.GameManager.M);
-            int treasureJ = (int)Random.Range(0, AppContext.GameManager.N);
-
-            //cellsArray[treasureI, treasureJ].HaveTreasure = true;
-        }
 
         //Вычисление координат центра игрового поля
         int middleI = AppContext.GameManager.M / 2;
@@ -90,6 +104,17 @@ public class LevelGenerateManager
         //Изменение положения камеры
         Camera.main.transform.GetComponent<CameraPositionController>().SetStartPosition();
 
+    }
+
+    //Уничтожение объектов
+    public void DestroyLevel()
+    {
+        foreach (GameObject cell in GameObject.FindGameObjectsWithTag("Cell"))
+        {
+            GameObject.Destroy(cell);
+        }
+
+        GameObject.Destroy(GameObject.FindGameObjectWithTag("GameBoard"));
     }
 
 }

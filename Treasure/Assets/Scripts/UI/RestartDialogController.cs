@@ -1,12 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RestartDialogController : MonoBehaviour
 {
-    void Start()
+    //Устанавливает значение нажписи, говорящей об результатах
+    public static void SetResultText(string text)
     {
-        this.gameObject.SetActive(false);
+        GameObject resultTextObject = GameObject.FindGameObjectWithTag("ResultText");
+        TextMeshProUGUI resultText = resultTextObject.GetComponent<TextMeshProUGUI>();
+        resultText.text = text;
     }
 
+    public void OnYesClick()
+    {
+        AppContext.DialogManager.RestartDialogHide();
+        AppContext.DialogManager.SettingsDialogShow();
+    }
 }

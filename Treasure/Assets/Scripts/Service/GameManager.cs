@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -78,6 +79,17 @@ public class GameManager
         get { return _isPaused; }
         set { _isPaused = value; }
     }
-#endregion
+    #endregion
+
+    #region methods
+    public void EndGame(String endText)
+    {
+        IsGameStarted = false;
+        AppContext.DialogManager.UiHide();
+        AppContext.DialogManager.RestartDialogShow();
+        RestartDialogController.SetResultText(endText);
+        AppContext.LevelGenerateManager.DestroyLevel();
+    }
+    #endregion
 
 }

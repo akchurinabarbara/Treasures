@@ -42,7 +42,7 @@ public class CameraPositionController : MonoBehaviour
                                      new Vector3(0.0f, _bias.y * _gameBoard.transform.localScale.x,_bias.z * _gameBoard.transform.localScale.z);
 
         //Начальный поворот камеры
-        transform.Rotate(_rotation);
+        transform.rotation = Quaternion.Euler(_rotation);
     }
 
     void Update()

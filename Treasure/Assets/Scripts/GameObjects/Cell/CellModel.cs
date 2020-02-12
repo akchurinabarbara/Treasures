@@ -18,9 +18,6 @@ public class CellModel
     //Игрок уже разместил сонар на этой ячейке
     private bool _haveSonar= false;
 
-    //Выделена ли ячейка
-    private bool _selected = false;
-
     //Местонахождение ячейки
     //Расположение по i
     private int _i;
@@ -52,12 +49,6 @@ public class CellModel
     {
         get { return _haveSonar; }
         set { _haveSonar = value; }
-    }
-
-    public bool Selected
-    {
-        get { return _selected; }
-        set { _selected = value; }
     }
 
     public int i
