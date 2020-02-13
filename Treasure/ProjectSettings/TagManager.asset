@@ -37,6 +37,8 @@ TagManager:
   - Treasure
   - App
   - Distance
+  - WinMusic
+  - DefeatMusic
   layers:
   - Default
   - TransparentFX

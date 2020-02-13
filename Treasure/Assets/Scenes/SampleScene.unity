@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m: 4
   n: 4
-  sonarCount: 16
+  sonarCount: 14
   sonarRadius: 4
   treasureCount: 4
 --- !u!1 &286963889
@@ -508,6 +508,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067530496817446038, guid: f94c74276da4abf45a105b82daba996b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f94c74276da4abf45a105b82daba996b, type: 3}
@@ -1171,11 +1176,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: pfRestartDialog
       objectReference: {fileID: 0}
-    - target: {fileID: 2482798204889615055, guid: 678091115ab8bda41824e5b92392e3a4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2482798204889615040, guid: 678091115ab8bda41824e5b92392e3a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1296,11 +1296,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 171267222}
-    - target: {fileID: 2482798205323792128, guid: 678091115ab8bda41824e5b92392e3a4,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7843717765258306715, guid: 678091115ab8bda41824e5b92392e3a4,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -1310,31 +1305,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3985158842730121293, guid: 678091115ab8bda41824e5b92392e3a4,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2482798204552795370, guid: 678091115ab8bda41824e5b92392e3a4,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2482798204552795370, guid: 678091115ab8bda41824e5b92392e3a4,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2482798204552795370, guid: 678091115ab8bda41824e5b92392e3a4,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2482798204552795370, guid: 678091115ab8bda41824e5b92392e3a4,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 678091115ab8bda41824e5b92392e3a4, type: 3}

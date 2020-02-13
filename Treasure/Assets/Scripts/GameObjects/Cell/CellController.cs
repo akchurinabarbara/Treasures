@@ -103,25 +103,25 @@ public class CellController : MonoBehaviour
     {        
         if (AppContext.GameManager.Score == AppContext.GameManager.TreasureCount)
         {
-            EndGame("You won");
+            EndGame(true);
         }
         else if (0 == AppContext.GameManager.SonarCount)
         {
-            EndGame("You lose");
+            EndGame(false);
         }
     }
 
-    private void EndGame(string resultText)
+    private void EndGame(bool win)
     {
         AppContext.GameManager.IsGameStarted = false;
         ShowAllTreasures();
-        StartCoroutine(PauseBeforeEndGame(resultText));
+        StartCoroutine(PauseBeforeEndGame(win));
     }
 
-    private IEnumerator PauseBeforeEndGame(string text)
+    private IEnumerator PauseBeforeEndGame(bool win)
     {
         yield return new WaitForSeconds(1);
-        AppContext.GameManager.EndGame(text);
+        AppContext.GameManager.EndGame(win);
     }
 
     private void ShowAllTreasures()

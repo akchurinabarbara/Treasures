@@ -101,11 +101,22 @@ public class GameManager
     #endregion
 
     #region methods
-    public void EndGame(String endText)
-    {               
+    public void EndGame(bool win)
+    {
         AppContext.DialogManager.UiHide();
         AppContext.DialogManager.RestartDialogShow();
-        RestartDialogController.SetResultText(endText);
+
+        if (win)
+        {
+            RestartDialogController.PlayWinMusic();
+            RestartDialogController.SetWinText();
+        }
+        else
+        {
+            RestartDialogController.PlayDefeatMusic();
+            RestartDialogController.SetDefeatText();
+        }
+        
         AppContext.LevelGenerateManager.DestroyLevel();
     }
     #endregion

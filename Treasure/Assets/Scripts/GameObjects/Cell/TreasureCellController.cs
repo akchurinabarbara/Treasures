@@ -29,6 +29,7 @@ public class TreasureCellController : CellController
                 }
             }
             _treasure.GetComponent<MeshRenderer>().enabled = true;
+            _treasure.GetComponent<AudioSource>().Play();
             UIController.SetFindTreasuresNumber(AppContext.GameManager.Score);
             CheckEndGame();
             CalculateDistance();
