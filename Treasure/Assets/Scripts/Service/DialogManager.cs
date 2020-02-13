@@ -2,36 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Управление диалоговыми окнами
 public class DialogManager 
 {
-    #region fields
+
+#region fields
     private GameObject _ui;
     //Окно с настройками игры
-    private GameObject _settingsDialog;
+    private GameObject _startDialog;
     //Окно, оповещающее об окончании игры
-    private GameObject _restartDialog;
+    private GameObject _resultDialog;
     //Окно паузы
     private GameObject _pauseDialog;
-    #endregion
+#endregion
 
-    #region constuctor
+#region constuctor
     public DialogManager()
     {
-        _ui = GameObject.FindGameObjectWithTag("UI");
+        _ui = GameObject.FindGameObjectWithTag(TagConfig.UI);
         _ui.SetActive(false);
 
-        _settingsDialog = GameObject.FindGameObjectWithTag("SettingsDialog");
-        _settingsDialog.SetActive(true);
+        _startDialog = GameObject.FindGameObjectWithTag(TagConfig.START_DIALOG);
+        _startDialog.SetActive(true);
 
-        _restartDialog = GameObject.FindGameObjectWithTag("RestartDialog");
-        _restartDialog.SetActive(false);
+        _resultDialog = GameObject.FindGameObjectWithTag(TagConfig.RESULT_DIALOG);
+        _resultDialog.SetActive(false);
 
-        _pauseDialog = GameObject.FindGameObjectWithTag("PauseDialog");
+        _pauseDialog = GameObject.FindGameObjectWithTag(TagConfig.PAUSE_DIALOG);
         _pauseDialog.SetActive(false);
     }
-    #endregion
+#endregion
 
-    #region methods
+#region methods
     public void UiShow()
     {
         _ui.SetActive(true);
@@ -42,24 +44,24 @@ public class DialogManager
         _ui.SetActive(false);
     }
 
-    public void SettingsDialogShow()
+    public void StartDialogShow()
     {
-        _settingsDialog.SetActive(true);
+        _startDialog.SetActive(true);
     }
 
-    public void SettingsDialogHide()
+    public void StartDialogHide()
     {
-        _settingsDialog.SetActive(false);
+        _startDialog.SetActive(false);
     }
 
-    public void RestartDialogShow()
+    public void ResultDialogShow()
     {
-       _restartDialog.SetActive(true);
+       _resultDialog.SetActive(true);
     }
 
-    public void RestartDialogHide()
+    public void ResultDialogHide()
     {
-        _restartDialog.SetActive(false);
+        _resultDialog.SetActive(false);
     }
 
 
@@ -72,5 +74,6 @@ public class DialogManager
     {
         _pauseDialog.SetActive(false);
     }
-    #endregion
+#endregion
+
 }

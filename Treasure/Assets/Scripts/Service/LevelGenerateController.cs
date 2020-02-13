@@ -3,29 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Тебе нужно определенно подумать, по каким классам разнести половину кода отсюда
-
+//Управление уровнем (его генерацией и уничтожением)
 public class LevelGenerateManager
 {
-    //ToDo Скорее всего, нужно вынести в отдельный менеджер или в GamrManager.
-    //Туда же или в GameLoadedManager код с генерацией уровня. Оставить  только отображение
-    
+
+#region fields
     //Коэффициент для определения размера объекта board
     private float _boardCoef = 6.0f;
+#endregion
 
+#region methods
+    //Генерация уровна
     public void Generate()
     {
-        GameObject gameZone = GameObject.FindGameObjectWithTag("GameZone");
-
-        //Генерация уровна
+        GameObject gameZone = GameObject.FindGameObjectWithTag(TagConfig.GAME_ZONE);
+        
         GameObject[,] cellsArray = new GameObject[AppContext.GameManager.M, AppContext.GameManager.N];
 
         //Генерация номеров для расположения сокровищ
-        List<LocationStruct> treasureCoordinates = new List<LocationStruct>();
+        List<Location> treasureCoordinates = new List<Location>();
 
         for (int i = 0; i < AppContext.GameManager.TreasureCount; i++)
         {
-            LocationStruct treasureLocation = new LocationStruct();
+            Location treasureLocation = new Location();
             do
             {
                 treasureLocation.i = (int)UnityEngine.Random.Range(0, AppContext.GameManager.M);
@@ -36,6 +36,7 @@ public class LevelGenerateManager
         }
 
         AppContext.GameManager.TreasureCoordinates = treasureCoordinates;
+
         //Отображение полей на экране
 
             for (int i = 0; i < AppContext.GameManager.M; i++)
@@ -44,11 +45,11 @@ public class LevelGenerateManager
             {
                 if (treasureCoordinates.Exists(element => i == element.i && j == element.j))
                 {
-                    cellsArray[i, j] = GameObject.Instantiate(Resources.Load("Embeded/Game/Cell/pfTreasureCell", typeof(GameObject))) as GameObject;
+                    cellsArray[i, j] = GameObject.Instantiate(Resources.Load(PrefubsNameConfig.pfTREASURECELL, typeof(GameObject))) as GameObject;
                 }
                 else
                 {
-                    cellsArray[i, j] = GameObject.Instantiate(Resources.Load("Embeded/Game/Cell/pfCell", typeof(GameObject))) as GameObject;
+                    cellsArray[i, j] = GameObject.Instantiate(Resources.Load(PrefubsNameConfig.pfCELL, typeof(GameObject))) as GameObject;
                 }
 
                 //Вычисление координат
@@ -58,8 +59,7 @@ public class LevelGenerateManager
                 cellsArray[i, j].transform.position = cellPosition;
                 cellsArray[i, j].transform.SetParent(gameZone.transform);
 
-                cellsArray[i, j].transform.GetComponent<CellController>().CellModel.i = i;
-                cellsArray[i, j].transform.GetComponent<CellController>().CellModel.j = j;         
+                cellsArray[i, j].transform.GetComponent<CellController>().Location = new Location(i, j);     
 
             }
         }
@@ -92,31 +92,31 @@ public class LevelGenerateManager
             boardZ = (cellsArray[middleI - 1, middleJ - 1].transform.position.z + cellsArray[middleI, middleJ].transform.position.z) / 2;
         }
 
-        AppContext.LocationManager.GameZoneCenter = new Vector3(boardX, gameZone.transform.position.y, boardZ);        
+        AppContext.GameZoneManager.GameZoneCenter = new Vector3(boardX, gameZone.transform.position.y, boardZ);        
 
-        GameObject board = GameObject.Instantiate(Resources.Load("Embeded/Game/Board/pfBoard", typeof(GameObject))) as GameObject;
+        GameObject board = GameObject.Instantiate(Resources.Load(PrefubsNameConfig.pfBOARD, typeof(GameObject))) as GameObject;
         board.transform.SetParent(gameZone.transform);
 
-        //TODO Перенести в класс для board
         board.transform.localScale = new Vector3(cellsArray[0, 0].transform.localScale.x * AppContext.GameManager.M / _boardCoef,
                                                         board.transform.localScale.y,
                                                         cellsArray[0, 0].transform.localScale.z * AppContext.GameManager.N / _boardCoef);
-        board.transform.position = AppContext.LocationManager.GameZoneCenter;
+        board.transform.position = AppContext.GameZoneManager.GameZoneCenter;
 
         //Изменение положения камеры
         Camera.main.transform.GetComponent<CameraPositionController>().SetStartPosition();
 
     }
 
-    //Уничтожение объектов
+    //Уничтожение уровня
     public void DestroyLevel()
     {
-        foreach (GameObject cell in GameObject.FindGameObjectsWithTag("Cell"))
+        foreach (GameObject cell in GameObject.FindGameObjectsWithTag(TagConfig.CELL))
         {
             GameObject.Destroy(cell);
         }
 
-        GameObject.Destroy(GameObject.FindGameObjectWithTag("GameBoard"));
+        GameObject.Destroy(GameObject.FindGameObjectWithTag(TagConfig.GAME_BOARD));
     }
+#endregion
 
 }

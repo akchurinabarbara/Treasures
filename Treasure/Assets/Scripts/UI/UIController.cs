@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//Управление интерфейсом пользователя
 public class UIController : MonoBehaviour
 {
-//Управление интерфейсом пользователя
 
-    #region methods
+#region methods
     void Start()
     {
         SetStartText();
     }
 
-
     //Показывает значения найденных сокровищ
     public static void SetFindTreasuresNumber(int count)
     {
-        GameObject findTreasuresNumber = GameObject.FindGameObjectWithTag("FindTreasuresNumber");
+        GameObject findTreasuresNumber = GameObject.FindGameObjectWithTag(TagConfig.FIND_TREASURE_NUMBER);
         TextMeshProUGUI findTreasuresNumberText = findTreasuresNumber.GetComponent<TextMeshProUGUI>();
         findTreasuresNumberText.text = count.ToString();
     }
@@ -25,7 +24,7 @@ public class UIController : MonoBehaviour
     //Показывает значения оставшихся сонаров
     public static void SetAvailableSonarsText(int count)
     {
-        GameObject availableSonars = GameObject.FindGameObjectWithTag("AvailableSonarsNumber");
+        GameObject availableSonars = GameObject.FindGameObjectWithTag(TagConfig.AVAILABLE_SONARS_NUMBER);
         TextMeshProUGUI availableSonarsText = availableSonars.GetComponent<TextMeshProUGUI>();
         availableSonarsText.text = count.ToString();
     }
@@ -33,7 +32,7 @@ public class UIController : MonoBehaviour
     //Показать начальное значения всех элементов пользовательского интерфейса
     public static void SetStartText()
     {
-        GameObject allTreasuresNumber = GameObject.FindGameObjectWithTag("AllTreasuresNumber");
+        GameObject allTreasuresNumber = GameObject.FindGameObjectWithTag(TagConfig.ALL_TREASURES_NUMBER);
         TextMeshProUGUI allTreasuresNumberText = allTreasuresNumber.GetComponent<TextMeshProUGUI>();
         allTreasuresNumberText.text = AppContext.GameManager.TreasureCount.ToString();
         SetFindTreasuresNumber(0);
@@ -50,6 +49,6 @@ public class UIController : MonoBehaviour
             AppContext.DialogManager.PauseDialogShow();
         }
     }
-    #endregion
+#endregion
 
 }

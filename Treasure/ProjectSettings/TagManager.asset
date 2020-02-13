@@ -13,7 +13,6 @@ TagManager:
   - AvailableSonarsNumber
   - AllTreasuresNumber
   - FindTreasuresNumber
-  - RestartDialog
   - InputFieldM
   - InputFieldN
   - InputFieldSonarCount
@@ -21,7 +20,6 @@ TagManager:
   - StartButton
   - ExitButton
   - InputFieldSonarRadius
-  - SettingsDialog
   - InputFieldTreasureCount
   - InputFieldMText
   - InputFieldNText
@@ -39,6 +37,8 @@ TagManager:
   - Distance
   - WinMusic
   - DefeatMusic
+  - ResultDialog
+  - StartDialog
   layers:
   - Default
   - TransparentFX

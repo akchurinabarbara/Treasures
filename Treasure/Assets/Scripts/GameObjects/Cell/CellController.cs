@@ -2,32 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Управление клеткой игрового поля
 public class CellController : MonoBehaviour
 {
-    #region fields
-    //Характеристики ячейки
-    protected CellModel _cellModel;
 
+#region fields
+    //Характеристики клетки
+    
+    //Выделение клетки 
+    protected GameObject selection;
+    
+    //Ссылка на сонар
     protected GameObject sonar;
 
-    //Смещение выделения
+    //Расположение
+    protected Location location;
+
+    //Смещение выделения относительно центра клетки
     private Vector3 _selectionsBias = new Vector3(0.0f, 0.2f, 0.0f);
 
+    //Смещение сонара относительно центра клетки
     protected Vector3 _sonarBias = new Vector3(0.0f, 4.0f, 0.0f);
-    #endregion
 
-    #region properties
-    public CellModel CellModel
-    {
-        get { return _cellModel; }
-    }
-    #endregion
+    //Время задержки перед показом экрана с результатом (в сек)
+    private int _delayTime = 2;
 
-    #region methods
-    void Awake()
+#endregion
+
+#region properties
+    public Location Location
     {
-        _cellModel = new CellModel();
+        get { return location; }
+        set { location = value; }
     }
+#endregion
+
+
+#region methods
 
     private void Start()
     {
@@ -41,13 +52,13 @@ public class CellController : MonoBehaviour
         {
             return;
         }
-            _cellModel.Selection.SetActive(true);
+            selection.SetActive(true);
     }
 
     //Cнимаем выделение, когда мышь не наведена
     private void OnMouseExit()
     {
-        _cellModel.Selection.SetActive(false);
+        selection.SetActive(false);
     }
 
     //Размещаем сонар, когда игрок нажал на клетку кнопкой мыши, предварительно проверив, можно ли это сделать
@@ -57,7 +68,7 @@ public class CellController : MonoBehaviour
         {
             return;
         }
-        if (!AppContext.GameManager.IsPaused && !CellModel.HaveSonar &&
+        if (!AppContext.GameManager.IsPaused && !sonar &&
                      AppContext.GameManager.SonarCount > 0)
         {
             AddSonar();
@@ -66,70 +77,69 @@ public class CellController : MonoBehaviour
         }
     }
 
+    //Загрузка выделения 
     protected void LoadSelection()
     {
-        _cellModel.Selection =
-                    Instantiate(Resources.Load("Embeded/Game/Cell/Selection/pfSelection", typeof(GameObject))) as GameObject;
+        selection =
+                    Instantiate(Resources.Load(PrefubsNameConfig.psSELECTION, typeof(GameObject))) as GameObject;
 
-        _cellModel.Selection.transform.SetParent(transform);
+        selection.transform.SetParent(transform);
 
-        _cellModel.Selection.transform.position = transform.position + _selectionsBias;
-        _cellModel.Selection.SetActive(false);
+        selection.transform.position = transform.position + _selectionsBias;
+        selection.SetActive(false);
     }
 
+    //Загрузка сонара
     protected void AddSonar()
     {
-        sonar = Instantiate(Resources.Load("Embeded/Game/Sonar/pfSonar", typeof(GameObject))) as GameObject;
+        sonar = Instantiate(Resources.Load(PrefubsNameConfig.pfSONAR, typeof(GameObject))) as GameObject;
         
         sonar.transform.position = transform.position + _sonarBias;
         sonar.transform.SetParent(transform);
-        CellModel.HaveSonar = true;
         AppContext.GameManager.SonarCount--;
         UIController.SetAvailableSonarsText(AppContext.GameManager.SonarCount);
         
 
     }
 
+    //Вычисление растояния от сонара до сокровищ
     public void CalculateDistance()
     {
         if (sonar)
         {
-            sonar.GetComponent<SonarController>().CalculateDistance(_cellModel.i, _cellModel.j);
+            sonar.GetComponent<SonarController>().CalculateDistance(location);
         }
     }
 
-    //Возможно, перенести в другой класс
+    //Проверка на завершение игры
     protected void CheckEndGame()
     {        
+        //Проверка, завершена ли игра по условиям выиграша игрока
         if (AppContext.GameManager.Score == AppContext.GameManager.TreasureCount)
         {
             EndGame(true);
         }
+        //Проверка, завершена ли игра по условиям проигрыша игрока
         else if (0 == AppContext.GameManager.SonarCount)
         {
             EndGame(false);
         }
     }
 
+    //Действия, которые должны быть совершены при окончании игры.
     private void EndGame(bool win)
     {
         AppContext.GameManager.IsGameStarted = false;
-        ShowAllTreasures();
+        AppContext.GameManager.ShowAllTreasures();
         StartCoroutine(PauseBeforeEndGame(win));
     }
 
+    //Задержка показа экрана результата при окончании игры
     private IEnumerator PauseBeforeEndGame(bool win)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(_delayTime);
         AppContext.GameManager.EndGame(win);
     }
+#endregion
 
-    private void ShowAllTreasures()
-    {
-        foreach(GameObject treasures in GameObject.FindGameObjectsWithTag("Treasure"))
-        {
-            treasures.GetComponent<MeshRenderer>().enabled = true;
-        }
-    }
-    #endregion
 }

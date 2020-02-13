@@ -3,27 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Клетка игрового поля с сокровищем
 public class TreasureCellController : CellController
 {
-    private GameObject _treasure;
 
+#region fields
+    //Ссылка на сокровище
+    private GameObject _treasure;
+#endregion
+
+#region properties
     private void Start()
     {
         LoadSelection();
         LoadTreasure();
     }
+#endregion
 
+#region methods
+    //При нажатии на клетку необходимо разместить сонар, увеличить счетчик найденных сокровищ и пересчитать расстояния
     private void  OnMouseDrag()
     {        
-        if (!AppContext.GameManager.IsPaused && !CellModel.HaveSonar &&
+        if (!AppContext.GameManager.IsPaused && !sonar &&
                      AppContext.GameManager.SonarCount > 0)
         {
             AddSonar();
             AppContext.GameManager.Score++;
             for (int i = 0; i< AppContext.GameManager.TreasureCoordinates.Count; i++)
             {
-                if(_cellModel.i == AppContext.GameManager.TreasureCoordinates[i].i 
-                    && _cellModel.j == AppContext.GameManager.TreasureCoordinates[i].j)
+                if(location.i == AppContext.GameManager.TreasureCoordinates[i].i 
+                    && location.j == AppContext.GameManager.TreasureCoordinates[i].j)
                 {
                     AppContext.GameManager.TreasureCoordinates.RemoveAt(i);
                 }
@@ -36,12 +45,7 @@ public class TreasureCellController : CellController
         }
     }
 
-
-    private IEnumerator PauseBeforeDestroy()
-    {
-        yield return new WaitForSeconds(50);
-    }
-
+    //Пересчет расстояний от сонаров до сокровищ
     private new void CalculateDistance()
     {
         foreach(GameObject cell in AppContext.GameZoneManager.Cells)
@@ -50,14 +54,17 @@ public class TreasureCellController : CellController
         }
     }
 
+    //Загрузка префаба сокровища
     private void LoadTreasure()
     {
         _treasure =
-                   Instantiate(Resources.Load("Embeded/Game/Treasure/pfTreasure", typeof(GameObject))) as GameObject;
+                   Instantiate(Resources.Load(PrefubsNameConfig.pfTREASURE, typeof(GameObject))) as GameObject;
 
         _treasure.transform.SetParent(transform);
 
         _treasure.transform.position = transform.position;
         _treasure.GetComponent<MeshRenderer>().enabled = false;
     }
+#endregion
+
 }

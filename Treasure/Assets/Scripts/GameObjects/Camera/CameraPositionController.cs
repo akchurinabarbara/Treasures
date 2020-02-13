@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Настройка позиции камеры. С помощью колесика мыши настраивается масштаб поля
 public class CameraPositionController : MonoBehaviour
 {
-   //Настройка позиции камеры. С помощью колесика мыши настраивается масштаб поля
-   //Мастштабность скролинга (скорость скролинга)
+
+#region fields
+    //Мастштабность скролинга (скорость скролинга)
     private float _deltaScale = 80.0f;
 
     //Объект игровой доски. Нужен для определения ограничений перемещений камеры
@@ -23,11 +25,13 @@ public class CameraPositionController : MonoBehaviour
 
     //Угол наклона камеры
     private Vector3 _rotation = new Vector3(75.0f, 0.0f, 0.0f);
+#endregion
 
+#region methods
     //Устанавливает начальное положение камеры на уровне
     public void SetStartPosition()
     {
-        _gameBoard = GameObject.FindGameObjectWithTag("GameBoard");
+        _gameBoard = GameObject.FindGameObjectWithTag(TagConfig.GAME_BOARD);
 
         _minScale = _gameBoard.transform.position.y + 10;
 
@@ -38,7 +42,7 @@ public class CameraPositionController : MonoBehaviour
 
 
         //Начальная позиция камеры
-        transform.position = AppContext.LocationManager.GameZoneCenter + 
+        transform.position = AppContext.GameZoneManager.GameZoneCenter + 
                                      new Vector3(0.0f, _bias.y * _gameBoard.transform.localScale.x,_bias.z * _gameBoard.transform.localScale.z);
 
         //Начальный поворот камеры
@@ -78,4 +82,6 @@ public class CameraPositionController : MonoBehaviour
         }
 
     }
+#endregion
+
 }

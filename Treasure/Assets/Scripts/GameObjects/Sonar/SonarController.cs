@@ -4,26 +4,28 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//Управление сонаром
 public class SonarController : MonoBehaviour
 {
+
+#region methods
     void Start()
     {
-        transform.GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+        transform.GetComponentInChildren<Canvas>().worldCamera = Camera.main; //задает камеру canvas, отображающем расстояние
     }
 
-    public void CalculateDistance(int i, int j)
+    //Вычисление дистанции
+    public void CalculateDistance(Location startLocation)
     {
-
-        int minDistanse = findDistanse(i, j);
+        int minDistanse = findDistanse(startLocation);
 
         transform.GetComponentInChildren<TextMeshProUGUI>().text = minDistanse == -1 ?
             "X" : minDistanse.ToString();
-
     }
 
 
     //Нахождение сокровищ под радиусом радара (диагонали учитываются)
-    private int findDistanse(int startI, int startJ)
+    private int findDistanse(Location startLocation)
     {
         int result = AppContext.GameManager.SonarRadius + 1;
 
@@ -31,63 +33,63 @@ public class SonarController : MonoBehaviour
         {
             //Вверх
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-                element => startI + i == element.i && startJ == element.j))
+                element => startLocation.i + i == element.i && startLocation.j == element.j))
             {
                 result = i < result ? i : result;
             }
 
             //Вниз
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-                element => startI - i == element.i && startJ == element.j))
+                element => startLocation.i - i == element.i && startLocation.j == element.j))
             {
                 result = i < result ? i : result;
             }
 
             //Вправо
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-              element => startI == element.i && startJ + i == element.j))
+              element => startLocation.i == element.i && startLocation.j + i == element.j))
             {
                 result = i < result ? i : result;
             }
 
             //Влево
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-                element => startI == element.i && startJ - i== element.j))
+                element => startLocation.i == element.i && startLocation.j - i== element.j))
             {
                 result = i < result ? i : result;
             }
 
             //Диагональ в право вверх
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-              element => startI + i == element.i && startJ + i == element.j))
+              element => startLocation.i + i == element.i && startLocation.j + i == element.j))
             {
                 result = i < result ? i : result;
             }
 
             //Диагональ в влево вниз
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-                element => startI - i == element.i && startJ - i == element.j))
+                element => startLocation.i - i == element.i && startLocation.j - i == element.j))
             {
                 result = i < result ? i : result;
             }
 
             //Диагональ в влево вверх
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-            element => startI + i == element.i && startJ - i == element.j))
+            element => startLocation.i + i == element.i && startLocation.j - i == element.j))
             {
                 result = i < result ? i : result;
             }
 
             //Диагональ вправо вниз
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-                element => startI - i == element.i && startJ + i == element.j))
+                element => startLocation.i - i == element.i && startLocation.j + i == element.j))
             {
                 result = i < result ? i : result;
             }
         }
 
         return result == AppContext.GameManager.SonarRadius + 1 ? -1 : result;
-
-
     }
+#endregion
+
 }

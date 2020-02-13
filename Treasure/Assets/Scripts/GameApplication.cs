@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Основная логика приложения, управление всеми менеджерами 
+//Управление всеми менеджерами и задание характеристик уровня
 public class GameApplication : MonoBehaviour
 {
+
+#region fields
     // Размеры поля
     public int m = 10;  // клетки в строке
     public int n = 15;  // строк
@@ -17,25 +19,27 @@ public class GameApplication : MonoBehaviour
 
     //Количество сокровищ на карте 
     public int treasureCount = 5;
+#endregion
 
+ #region methods
+    //Создание всез менеджеров и задание значений для игры через редактор Unity
     private void Awake()
     {
         AppContext.Configure();
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-    private void Start()
-    {
-        AppContext.GameManager.M =  m;
+        AppContext.GameManager.M = m;
         AppContext.GameManager.N = n;
         AppContext.GameManager.StartSonarCount = sonarCount;
         AppContext.GameManager.SonarRadius = sonarRadius;
         AppContext.GameManager.TreasureCount = treasureCount;
     }
+
+    //Выход из игры
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+
 
     void Update()
     {
@@ -44,4 +48,6 @@ public class GameApplication : MonoBehaviour
             return;
         }
     }
+#endregion
+
 }

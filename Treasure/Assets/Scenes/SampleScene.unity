@@ -1174,7 +1174,7 @@ PrefabInstance:
     - target: {fileID: 2482798204889615055, guid: 678091115ab8bda41824e5b92392e3a4,
         type: 3}
       propertyPath: m_Name
-      value: pfRestartDialog
+      value: pfResultDialog
       objectReference: {fileID: 0}
     - target: {fileID: 2482798204889615040, guid: 678091115ab8bda41824e5b92392e3a4,
         type: 3}
@@ -1324,7 +1324,7 @@ PrefabInstance:
     - target: {fileID: 6104260763336006910, guid: c66800152b97a76478917860084701ae,
         type: 3}
       propertyPath: m_Name
-      value: pfSettingsDialog
+      value: pfStartDialog
       objectReference: {fileID: 0}
     - target: {fileID: 6104260763336006911, guid: c66800152b97a76478917860084701ae,
         type: 3}

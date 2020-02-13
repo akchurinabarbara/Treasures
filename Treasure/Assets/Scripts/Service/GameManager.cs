@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Общие конфигурации игры. Информация об свойствах раунда (текущего уровня)
+//Управление игрой и ее конфигурацей. Информация об свойствах раунда (текущего уровня)
 public class GameManager
 {
+
 #region Fields
     // Размеры поля
     private int _m = 10;  // клетки в строке
@@ -24,7 +25,7 @@ public class GameManager
     private int _treasureCount = 5;
 
     //Распрежеление сокровищ по карте
-    private List<LocationStruct> _treasureCoordinates;
+    private List<Location> _treasureCoordinates;
 
     //Счет (количетсво найденных сундуков с сокровищями во время текущего раунда
     private int _score = 0;
@@ -75,7 +76,7 @@ public class GameManager
         set { _treasureCount = value; }
     }
 
-    public List<LocationStruct> TreasureCoordinates
+    public List<Location> TreasureCoordinates
     {
         get { return _treasureCoordinates; }
         set { _treasureCoordinates = value; }
@@ -100,25 +101,35 @@ public class GameManager
     }
     #endregion
 
-    #region methods
+#region methods
+    //Завершить текущий раунд и показать окно с результатами
     public void EndGame(bool win)
     {
         AppContext.DialogManager.UiHide();
-        AppContext.DialogManager.RestartDialogShow();
+        AppContext.DialogManager.ResultDialogShow();
 
         if (win)
         {
-            RestartDialogController.PlayWinMusic();
-            RestartDialogController.SetWinText();
+            ResultDialogController.PlayWinMusic();
+            ResultDialogController.SetWinText();
         }
         else
         {
-            RestartDialogController.PlayDefeatMusic();
-            RestartDialogController.SetDefeatText();
+            ResultDialogController.PlayDefeatMusic();
+            ResultDialogController.SetDefeatText();
         }
         
         AppContext.LevelGenerateManager.DestroyLevel();
     }
-    #endregion
+
+    //Показать все сокровища
+    public void ShowAllTreasures()
+    {
+        foreach (GameObject treasures in GameObject.FindGameObjectsWithTag(TagConfig.TREASURE))
+        {
+            treasures.GetComponent<MeshRenderer>().enabled = true;
+        }
+    }
+#endregion
 
 }
