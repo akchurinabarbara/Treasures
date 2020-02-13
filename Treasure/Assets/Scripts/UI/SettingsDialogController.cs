@@ -8,31 +8,27 @@ using UnityEngine.UI;
 public class SettingsDialogController : MonoBehaviour
 {
     //Управление всеми компонентами окна настройки
-    #region fields
-    private TMP_InputField _inputFieldMText;
-    private TMP_InputField _inputFieldNText;
-    private TMP_InputField _inputFieldSonarCountText;
-    private TMP_InputField _inputFieldSonarRadiusText;
-    private TMP_InputField _inputFieldTreasureCountText;
-    #endregion
-
     private void Start()
     {
         GameObject inputFieldMObject = GameObject.FindGameObjectWithTag("InputFieldM");
-        _inputFieldMText = inputFieldMObject.GetComponentInChildren<TMP_InputField>();
-
+        TMP_InputField inputFieldMText = inputFieldMObject.GetComponentInChildren<TMP_InputField>();
+        inputFieldMText.text = AppContext.GameManager.M.ToString();
 
         GameObject inputFieldNObject = GameObject.FindGameObjectWithTag("InputFieldN");
-        _inputFieldNText = inputFieldNObject.GetComponentInChildren<TMP_InputField>();
+        TMP_InputField inputFieldNText = inputFieldNObject.GetComponentInChildren<TMP_InputField>();
+        inputFieldNText.text = AppContext.GameManager.N.ToString();
 
         GameObject inputFieldSonarCountObject = GameObject.FindGameObjectWithTag("InputFieldSonarCount");
-        _inputFieldSonarCountText = inputFieldSonarCountObject.GetComponentInChildren<TMP_InputField>();
+        TMP_InputField inputFieldSonarCountText = inputFieldSonarCountObject.GetComponentInChildren<TMP_InputField>();
+        inputFieldSonarCountText.text = AppContext.GameManager.StartSonarCount.ToString();
 
         GameObject inputFieldSonarRadiusObject = GameObject.FindGameObjectWithTag("InputFieldSonarRadius");
-        _inputFieldSonarRadiusText = inputFieldSonarRadiusObject.GetComponentInChildren<TMP_InputField>();
+        TMP_InputField inputFieldSonarRadiusText = inputFieldSonarRadiusObject.GetComponentInChildren<TMP_InputField>();
+        inputFieldSonarRadiusText.text = AppContext.GameManager.SonarRadius.ToString();
 
         GameObject inputFieldSonarTreasureCountObject = GameObject.FindGameObjectWithTag("InputFieldTreasureCount");
-        _inputFieldTreasureCountText = inputFieldSonarTreasureCountObject.GetComponentInChildren<TMP_InputField>();
+        TMP_InputField inputFieldTreasureCountText = inputFieldSonarTreasureCountObject.GetComponentInChildren<TMP_InputField>();
+        inputFieldTreasureCountText.text = AppContext.GameManager.TreasureCount.ToString();
 
     }
 
@@ -40,11 +36,7 @@ public class SettingsDialogController : MonoBehaviour
     #region Listeners
     public void OnStartButtonClick()
     {
-        AppContext.GameManager.M = Convert.ToInt32(_inputFieldMText.text);
-        AppContext.GameManager.N = Convert.ToInt32(_inputFieldNText.text);
-        AppContext.GameManager.SonarCount = Convert.ToInt32(_inputFieldSonarCountText.text);
-        AppContext.GameManager.SonarRadius = Convert.ToInt32(_inputFieldSonarRadiusText.text);
-        AppContext.GameManager.TreasureCount = Convert.ToInt32(_inputFieldTreasureCountText.text);
+        AppContext.GameManager.SonarCount = AppContext.GameManager.StartSonarCount;
         AppContext.GameManager.Score = 0;
         
         AppContext.DialogManager.UiShow();

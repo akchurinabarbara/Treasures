@@ -18,11 +18,10 @@ public class LevelGenerateManager
         GameObject gameZone = GameObject.FindGameObjectWithTag("GameZone");
 
         //Генерация уровна
-        AppContext.GameZoneManager.Cells = new GameObject[AppContext.GameManager.M, AppContext.GameManager.N];
-        GameObject[,] cellsArray = AppContext.GameZoneManager.Cells;
+        GameObject[,] cellsArray = new GameObject[AppContext.GameManager.M, AppContext.GameManager.N];
 
         //Генерация номеров для расположения сокровищ
-        LocationStruct[] treasureCoordinates = new LocationStruct[AppContext.GameManager.TreasureCount];
+        List<LocationStruct> treasureCoordinates = new List<LocationStruct>();
 
         for (int i = 0; i < AppContext.GameManager.TreasureCount; i++)
         {
@@ -32,17 +31,18 @@ public class LevelGenerateManager
                 treasureLocation.i = (int)UnityEngine.Random.Range(0, AppContext.GameManager.M);
                 treasureLocation.j = (int)UnityEngine.Random.Range(0, AppContext.GameManager.N);
             }
-            while (Array.Exists(treasureCoordinates, element =>  treasureLocation.i == element.i && treasureLocation.j == element.j));
-            treasureCoordinates[i] = treasureLocation;
+            while (treasureCoordinates.Exists(element =>  treasureLocation.i == element.i && treasureLocation.j == element.j));
+            treasureCoordinates.Add(treasureLocation);
         }
 
+        AppContext.GameManager.TreasureCoordinates = treasureCoordinates;
         //Отображение полей на экране
 
             for (int i = 0; i < AppContext.GameManager.M; i++)
         {
             for (int j = 0; j < AppContext.GameManager.N; j++)
             {
-                if (Array.Exists(treasureCoordinates, element => i == element.i && j == element.j))
+                if (treasureCoordinates.Exists(element => i == element.i && j == element.j))
                 {
                     cellsArray[i, j] = GameObject.Instantiate(Resources.Load("Embeded/Game/Cell/pfTreasureCell", typeof(GameObject))) as GameObject;
                 }
@@ -64,6 +64,8 @@ public class LevelGenerateManager
             }
         }
 
+
+        AppContext.GameZoneManager.Cells = cellsArray;
 
         //Вычисление координат центра игрового поля
         int middleI = AppContext.GameManager.M / 2;
