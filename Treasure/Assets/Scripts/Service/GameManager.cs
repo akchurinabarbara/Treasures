@@ -11,6 +11,9 @@ public class GameManager
     private int _m = 10;  // клетки в строке
     private int _n = 15;  // строк
 
+    // Изначальное Количество доступных игроку локаторов
+    private int _startSonarCount = 10;
+
     // Количество доступных игроку локаторов
     private int _sonarCount = 10;
 
@@ -20,6 +23,8 @@ public class GameManager
     //Количество сокровищ на карте 
     private int _treasureCount = 5;
 
+    //Распрежеление сокровищ по карте
+    private List<LocationStruct> _treasureCoordinates;
 
     //Счет (количетсво найденных сундуков с сокровищями во время текущего раунда
     private int _score = 0;
@@ -50,16 +55,30 @@ public class GameManager
         set { _sonarCount = value; }
     }
 
+
+    public int StartSonarCount
+    {
+        get { return _startSonarCount; }
+        set { _startSonarCount = value; }
+    }
+
     public int SonarRadius
     {
         get { return _sonarRadius; }
         set { _sonarRadius = value; }
     }
 
+
     public int TreasureCount
     {
         get { return _treasureCount; }
         set { _treasureCount = value; }
+    }
+
+    public List<LocationStruct> TreasureCoordinates
+    {
+        get { return _treasureCoordinates; }
+        set { _treasureCoordinates = value; }
     }
 
     public int Score
@@ -83,8 +102,7 @@ public class GameManager
 
     #region methods
     public void EndGame(String endText)
-    {
-        IsGameStarted = false;
+    {               
         AppContext.DialogManager.UiHide();
         AppContext.DialogManager.RestartDialogShow();
         RestartDialogController.SetResultText(endText);

@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\GameObjects\Cell\CellController.cs" />
     <Compile Include="Assets\Scripts\GameObjects\Cell\CellModel.cs" />
     <Compile Include="Assets\Scripts\GameObjects\Cell\TreasureCellController.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\Sonar\SonarController.cs" />
     <Compile Include="Assets\Scripts\Service\DialogManager.cs" />
     <Compile Include="Assets\Scripts\Service\GameManager.cs" />
     <Compile Include="Assets\Scripts\Service\GameZoneManager.cs" />
