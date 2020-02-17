@@ -54,42 +54,83 @@ public class SonarController : MonoBehaviour
 
             //Влево
             if (AppContext.GameManager.TreasureCoordinates.Exists(
-                element => startLocation.i == element.i && startLocation.j - i== element.j))
-            {
-                result = i < result ? i : result;
-            }
-
-            //Диагональ в право вверх
-            if (AppContext.GameManager.TreasureCoordinates.Exists(
-              element => startLocation.i + i == element.i && startLocation.j + i == element.j))
-            {
-                result = i < result ? i : result;
-            }
-
-            //Диагональ в влево вниз
-            if (AppContext.GameManager.TreasureCoordinates.Exists(
-                element => startLocation.i - i == element.i && startLocation.j - i == element.j))
-            {
-                result = i < result ? i : result;
-            }
-
-            //Диагональ в влево вверх
-            if (AppContext.GameManager.TreasureCoordinates.Exists(
-            element => startLocation.i + i == element.i && startLocation.j - i == element.j))
-            {
-                result = i < result ? i : result;
-            }
-
-            //Диагональ вправо вниз
-            if (AppContext.GameManager.TreasureCoordinates.Exists(
-                element => startLocation.i - i == element.i && startLocation.j + i == element.j))
+                element => startLocation.i == element.i && startLocation.j - i == element.j))
             {
                 result = i < result ? i : result;
             }
         }
+        //Оюласти по диагоналям
+        //Надеюссь, я правильно поняла принцып, как вычисляется расстояние по непрямым диагоналям
+        for (int i = 1; i < AppContext.GameManager.SonarRadius + 1; i++)
+            for (int j = 1; j < AppContext.GameManager.SonarRadius + 1; j++)
+            {
+                int min;
+                //Диагональ в право вверх
+                if (AppContext.GameManager.TreasureCoordinates.Exists(
+                  element => startLocation.i + i == element.i && startLocation.j + j == element.j))
+                {
+                    min = i > j ? i : j;
+                    result = min < result ? min : result;
+                }
+
+                //Диагональ в влево вниз
+                if (AppContext.GameManager.TreasureCoordinates.Exists(
+                    element => startLocation.i - i == element.i && startLocation.j - j == element.j))
+                {
+                    min = i > j ? i : j;
+                    result = min < result ? min : result;
+                }
+
+                //Диагональ в влево вверх
+                if (AppContext.GameManager.TreasureCoordinates.Exists(
+                element => startLocation.i + i == element.i && startLocation.j - j == element.j))
+                {
+                    min = i > j ? i : j;
+                    result = min < result ? min : result;
+                }
+
+                //Диагональ вправо вниз
+                if (AppContext.GameManager.TreasureCoordinates.Exists(
+                    element => startLocation.i - i == element.i && startLocation.j + j == element.j))
+                {
+                    min = i > j ? i : j;
+                    result = min < result ? min : result;
+                }
+            }
+        /*
+        //Диагональ в право вверх
+        if (AppContext.GameManager.TreasureCoordinates.Exists(
+          element => startLocation.i + i == element.i && startLocation.j + i == element.j))
+        {
+            result = i < result ? i : result;
+        }
+
+        //Диагональ в влево вниз
+        if (AppContext.GameManager.TreasureCoordinates.Exists(
+            element => startLocation.i - i == element.i && startLocation.j - i == element.j))
+        {
+            result = i < result ? i : result;
+        }
+
+        //Диагональ в влево вверх
+        if (AppContext.GameManager.TreasureCoordinates.Exists(
+        element => startLocation.i + i == element.i && startLocation.j - i == element.j))
+        {
+            result = i < result ? i : result;
+        }
+
+        //Диагональ вправо вниз
+        if (AppContext.GameManager.TreasureCoordinates.Exists(
+            element => startLocation.i - i == element.i && startLocation.j + i == element.j))
+        {
+            result = i < result ? i : result;
+        }
+    }
+      */
 
         return result == AppContext.GameManager.SonarRadius + 1 ? -1 : result;
     }
+
 #endregion
 
 }

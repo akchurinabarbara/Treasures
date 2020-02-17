@@ -224,8 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fe0ef4eb1520d4ba97b11f205e0389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m: 4
-  n: 4
+  m: 7
+  n: 7
   sonarCount: 14
   sonarRadius: 4
   treasureCount: 4
